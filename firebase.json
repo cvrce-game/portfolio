@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "papun-kumar-mohapatra",
     "public": "build",
     "ignore": [
       "firebase.json",
