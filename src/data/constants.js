@@ -104,7 +104,7 @@ export const skills = [
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLQKd_MRed_mZQlgrzQuUXVA3P39ssOVX8_g&s",
       },
       {
-        name: "Kubernate",
+        name: "Kubernetes",
         image:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPKA-U9m5BxYQDF1O7atMfj9EMMXEoGu4t0Q&s",
       },
@@ -124,7 +124,7 @@ export const skills = [
           "https://cdn-icons-png.flaticon.com/512/10484/10484359.png",
       },
       {
-        name: "Radis",
+        name: "Redis",
         image:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Logo-redis.svg/960px-Logo-redis.svg.png",
       },
@@ -139,7 +139,7 @@ export const skills = [
           "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
       },
       {
-        name: "Ecplise",
+        name: "Eclipse",
         image:
           "https://www.svgrepo.com/show/353685/eclipse-icon.svg",
       },
@@ -167,7 +167,7 @@ export const experiences = [
     role: "Senior Consultant",
     company: "Deloitte Consulting USI",
     date: "Apr 2024 - Present · 1 yr 9 mos",
-    desc: "Java Scripts, React, .Net, Jira, Project Management",
+    desc: "JavaScript, React, .Net, Jira, Project Management",
     projectName: "State of Florida Worker Portal – Underwriting Ecosystem Modernization",
     projectDescription: "Led end to end development modernization and architectural overhaul of the State of Florida's critical public assistance portal. This enterprise-scale ecosystem serves as the central hub for Floridians to apply for and manage vital benefits, including SNAP (Food Stamps), Medicaid, and TANF (Cash Assistance). The initiative focused on transforming the legacy system into a responsive, accessible, and high-performance web and mobile interface, streamlining the application process for millions of residents and enhancing workflow efficiency for state caseworkers.",
     skills: [
@@ -185,7 +185,7 @@ export const experiences = [
     role: "Consultant",
     company: "Deloitte Consulting USI",
     date: "April 2019 - April 2022",
-    desc: "Java Scripts, Angular",
+    desc: "JavaScript, Angular",
     projectName: "HPE Enterprise Master Data Management (MDM) Solution",
     projectDescription: "Served as a Full Stack Technical Lead for an enterprise-grade MDM solution designed to establish a 'Single Source of Truth' (Golden Record) for critical business data. The system consolidated disparate data streams from legacy ERP systems (SAP, Siebel) and cloud infrastructure (HPE GreenLake) to ensure uniformity across Customer, Product, and Supplier domains. The project delivered a high-performance web portal that enabled Data Stewards to visualize data lineage, resolve conflicts, and enforce governance policies.",
     skills: [
