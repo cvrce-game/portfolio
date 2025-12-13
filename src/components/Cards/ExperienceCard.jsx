@@ -156,15 +156,25 @@ const ExperienceCard = ({ experience }) => {
                 </Body>
             </Top>
             <Description>
+                {experience?.projectName &&
+                    <div style={{ marginBottom: '12px' }}>
+                        <div style={{ fontSize: '16px', fontWeight: '600', marginBottom: '8px', color: `${({ theme }) => theme.text_primary}` }}>
+                            Project: {experience?.projectName}
+                        </div>
+                        {experience?.projectDescription &&
+                            <Span style={{ marginBottom: '12px' }}>{experience?.projectDescription}</Span>
+                        }
+                    </div>
+                }
                 {experience?.desc &&
-                    <Span>{experience?.desc}</Span>
+                    <Span><b>Technology Stack: </b> {experience?.desc}</Span>
 
                 }
                 {experience?.skills &&
                     <>
                         <br />
                         <Skills>
-                            <b>Skills:</b>
+                            <b>Responsibilites:</b>
                             <ItemWrapper>
                                 {experience?.skills?.map((skill, index) => (
                                     <Skill>• {skill}</Skill>
