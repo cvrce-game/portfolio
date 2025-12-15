@@ -183,7 +183,7 @@ const Button = styled.a`
 
 
 const index = ({ openModal, setOpenModal }) => {
-    const project = openModal?.project;
+    const award = openModal?.project;
     return (
         <Modal open={true} onClose={() => setOpenModal({ state: false, project: null })}>
             <Container>
@@ -197,21 +197,40 @@ const index = ({ openModal, setOpenModal }) => {
                         }}
                         onClick={() => setOpenModal({ state: false, project: null })}
                     />
-                    <Image src={project?.image} />
-                    <Title>{project?.title}</Title>
-                    <Date>{project.date}</Date>
-                    <Tags>
-                        {project?.tags.map((tag) => (
-                            <Tag>{tag}</Tag>
-                        ))}
-                    </Tags>
-                    <Desc>{project?.description}</Desc>
-                    {project.member && (
+                    {award?.pdf && (
+                        <iframe
+                            src={award.pdf}
+                            style={{
+                                width: "100%",
+                                height: "600px",
+                                border: "none",
+                                borderRadius: "12px",
+                                marginTop: "20px",
+                            }}
+                            title={award?.title}
+                            allow="fullscreen"
+                            allowFullScreen={true}
+                        />
+                    )}
+                    {!award?.pdf && award?.img && (
+                        <Image src={award?.img} />
+                    )}
+                    <Title>{award?.title}</Title>
+                    {award?.date && <Date>{award.date}</Date>}
+                    {award?.tags && (
+                        <Tags>
+                            {award?.tags.map((tag) => (
+                                <Tag key={tag}>{tag}</Tag>
+                            ))}
+                        </Tags>
+                    )}
+                    <Desc>{award?.description || award?.desc}</Desc>
+                    {award?.member && (
                         <>
                             <Label>Members</Label>
                             <Members>
-                                {project?.member.map((member) => (
-                                    <Member>
+                                {award?.member.map((member) => (
+                                    <Member key={member.name}>
                                         <MemberImage src={member.img} />
                                         <MemberName>{member.name}</MemberName>
                                         <a href={member.github} target="new" style={{textDecoration: 'none', color: 'inherit'}}>
@@ -225,10 +244,12 @@ const index = ({ openModal, setOpenModal }) => {
                             </Members>
                         </>
                     )}
-                    <ButtonGroup>
-                        <Button dull href={project?.github} target='new'>View Code</Button>
-                        <Button href={project?.webapp} target='new'>View Live App</Button>
-                    </ButtonGroup>
+                    {(award?.github || award?.webapp) && (
+                        <ButtonGroup>
+                            {award?.github && <Button dull href={award?.github} target='new'>View Code</Button>}
+                            {award?.webapp && <Button href={award?.webapp} target='new'>View Live App</Button>}
+                        </ButtonGroup>
+                    )}
                 </Wrapper>
             </Container>
 

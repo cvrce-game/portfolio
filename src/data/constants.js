@@ -10,7 +10,7 @@ export const Bio = {
     "I am a motivated and versatile individual, always eager to take on new challenges. With a passion for learning I am dedicated to delivering high-quality results. With a positive attitude and a growth mindset, I am ready to make a meaningful contribution and achieve great things.",
   github: "https://github.com/cvrce-game",
   resume:
-    "https://drive.google.com/file/d/1St5S_ZE2Ab8w3og3fSTlmQ1w0YQ11A_I/view?usp=sharing",
+    "https://drive.google.com/file/d/1Ch8I0C1j1ChRxO2PtXeF-DbailJZkobi/view?usp=drive_link",
   linkedin: "https://www.linkedin.com/in/papun-kumar-mohapatra/",
   insta: "https://www.instagram.com/iam_papun/",
   facebook: "https://www.facebook.com/papund.rockstr/",
@@ -253,3 +253,47 @@ export const TimeLineData = [
   { year: 2020, text: "Shared my projects with the world" },
   { year: 2021, text: "Started my own platform" },
 ];
+
+export const awards = [
+  {
+    id: 1,
+    title: "Case 360 Leadership Award",
+    description: "Awarded for outstanding contributions to the State of Florida Worker Portal project, demonstrating exceptional technical leadership and architectural design.",
+    img: "https://media.licdn.com/dms/image/v2/D5622AQH6ItSpEN5_nA/feedshare-shrink_800/B56ZrtZI6pLIAg-/0/1764919382380?e=1767225600&v=beta&t=ha9mC8kDOtVG5G_DydBWdo-4VPZShclBfc8NBp-PI6A",
+    category: "Outstanding award",
+    date: "2025",
+    tags: ["Leadership", "Architecture", "Innovation"],
+    pdf: "https://drive.google.com/file/d/1tH7pH9QF6-m2s595uYdK-PQzlB3MTeqg/preview?embedded=true",
+  },
+  {
+    id: 2,
+    title: "CPTS Leadership",
+    description: "Recognition for effectively managing and mentoring a hybrid team of onshore and offshore developers, ensuring high-quality deliverables and continuous productivity.",
+    img: "https://media.licdn.com/dms/image/v2/D5622AQH6ItSpEN5_nA/feedshare-shrink_800/B56ZrtZI6pLIAg-/0/1764919382380?e=1767225600&v=beta&t=ha9mC8kDOtVG5G_DydBWdo-4VPZShclBfc8NBp-PI6A",
+    category: "Applause Award",
+    date: "2024",
+    tags: ["Team Management", "Mentorship"],
+    pdf: "https://drive.google.com/file/d/1VFsuPJkRcLXNH86mTv2YGR2L3ANhITog/preview?embedded=true",
+  },
+  {
+    id: 3,
+    title: "AI Innovation",
+    description: "Award for exceptional performance in optimizing system architecture, improving application performance, and delivering enterprise-scale solutions.",
+    img: "https://media.licdn.com/dms/image/v2/D5622AQH6ItSpEN5_nA/feedshare-shrink_800/B56ZrtZI6pLIAg-/0/1764919382380?e=1767225600&v=beta&t=ha9mC8kDOtVG5G_DydBWdo-4VPZShclBfc8NBp-PI6A",
+    category: "Applause Award",
+    date: "2024",
+    tags: ["AI Integration", "Optimization", "Quality"],
+    pdf: "https://drive.google.com/file/d/1fD8WVo2cjJ9yVVEm4WKuHm5WzR6Z0pjY/preview?embedded=true",
+  },
+  {
+    id: 4,
+    title: "Frontend Excellence",
+    description: "Award for exceptional performance in optimizing system architecture, improving application performance, and delivering enterprise-scale solutions.",
+    img: "https://media.licdn.com/dms/image/v2/D5622AQH6ItSpEN5_nA/feedshare-shrink_800/B56ZrtZI6pLIAg-/0/1764919382380?e=1767225600&v=beta&t=ha9mC8kDOtVG5G_DydBWdo-4VPZShclBfc8NBp-PI6A",
+    category: "Applause Award",
+    date: "2024",
+    tags: ["Mentor", "Optimization", "Quality"],
+    pdf: "https://drive.google.com/file/d/1cQTRZihEjV2-xjHW59rmkD5tucY_GtjN/preview?embedded=true",
+  },
+];
+
