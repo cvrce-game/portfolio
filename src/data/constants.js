@@ -268,7 +268,7 @@ export const awards = [
   {
     id: 2,
     title: "CPTS Leadership",
-    description: "Recognition for effectively managing and mentoring a hybrid team of onshore and offshore developers, ensuring high-quality deliverables and continuous productivity.",
+    description: "Though CPTS module was entirely owned by onsite, Papun has led CPTS team from offshore to help onsite team in the need of the hour. He has daily interacted with onsite Manager, understood the functionality, led new onboarded developers and fixed 56 defects to make sure there is no impact on UAT/Go-Live delivery.",
     img: "https://media.licdn.com/dms/image/v2/D5622AQH6ItSpEN5_nA/feedshare-shrink_800/B56ZrtZI6pLIAg-/0/1764919382380?e=1767225600&v=beta&t=ha9mC8kDOtVG5G_DydBWdo-4VPZShclBfc8NBp-PI6A",
     category: "Applause Award",
     date: "2024",
@@ -278,7 +278,7 @@ export const awards = [
   {
     id: 3,
     title: "AI Innovation",
-    description: "Award for exceptional performance in optimizing system architecture, improving application performance, and delivering enterprise-scale solutions.",
+    description: "Awarded for leading ADI Sonar, Code Coverage, and enhancement/defect fixes from USI, along with delivering critical PA Lite–related changes essential for the upcoming Case 360 and Wizard releases. Additionally, he designed and developed the framework left navigation component.",
     img: "https://media.licdn.com/dms/image/v2/D5622AQH6ItSpEN5_nA/feedshare-shrink_800/B56ZrtZI6pLIAg-/0/1764919382380?e=1767225600&v=beta&t=ha9mC8kDOtVG5G_DydBWdo-4VPZShclBfc8NBp-PI6A",
     category: "Applause Award",
     date: "2024",
@@ -288,12 +288,32 @@ export const awards = [
   {
     id: 4,
     title: "Frontend Excellence",
-    description: "Award for exceptional performance in optimizing system architecture, improving application performance, and delivering enterprise-scale solutions.",
+    description: "Awarded for exceptional performance as a Team Lead for client-side development. Spearheaded the client framework setup through strategic collaboration with the LIFT team and delivered multiple complex React use cases in strict adherence to coding guidelines. Recognized for technical excellence in mentorship, conducting rigorous code reviews, and resolving critical technical blockers for junior developers.",
     img: "https://media.licdn.com/dms/image/v2/D5622AQH6ItSpEN5_nA/feedshare-shrink_800/B56ZrtZI6pLIAg-/0/1764919382380?e=1767225600&v=beta&t=ha9mC8kDOtVG5G_DydBWdo-4VPZShclBfc8NBp-PI6A",
     category: "Applause Award",
-    date: "2024",
+    date: "2023",
     tags: ["Mentor", "Optimization", "Quality"],
     pdf: "https://drive.google.com/file/d/1cQTRZihEjV2-xjHW59rmkD5tucY_GtjN/preview?embedded=true",
+  },
+  {
+    id: 5,
+    title: "HPE Leadership",
+    description: "Awarded for commitment and dedication in contributing to the HPE program.",
+    img: "https://media.licdn.com/dms/image/v2/D5622AQH6ItSpEN5_nA/feedshare-shrink_800/B56ZrtZI6pLIAg-/0/1764919382380?e=1767225600&v=beta&t=ha9mC8kDOtVG5G_DydBWdo-4VPZShclBfc8NBp-PI6A",
+    category: "Applause Award",
+    date: "2022",
+    tags: ["developer", "trailblazer", "commitment"],
+    pdf: "https://drive.google.com/file/d/1bwCN3Kyz3Q5Xiz1JiK_DqPDHnc9omEW4/preview?embedded=true",
+  },
+  {
+    id: 6,
+    title: "Outstanding Performance for HPE Program",
+    description: "Awarded for commitment and dedication in contributing to the HPE program.",
+    img: "https://media.licdn.com/dms/image/v2/D5622AQH6ItSpEN5_nA/feedshare-shrink_800/B56ZrtZI6pLIAg-/0/1764919382380?e=1767225600&v=beta&t=ha9mC8kDOtVG5G_DydBWdo-4VPZShclBfc8NBp-PI6A",
+    category: "Applause Award",
+    date: "2021",
+    tags: ["developer", "trailblazer", "commitment"],
+    pdf: "https://drive.google.com/file/d/18MmDHKFVbQRqGkCAICJsCKNlLpi9WwKx/preview?embedded=true",
   },
 ];
 
