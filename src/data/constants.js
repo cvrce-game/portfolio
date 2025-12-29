@@ -1,14 +1,18 @@
-function calculateFromString(dateStr) {
+import * as XLSX from "xlsx";
+
+/* ================= DATE UTILS ================= */
+
+export function calculateFromString(dateStr) {
   const [monthStr, yearStr] = dateStr.split(" ");
   const monthMap = {
     Jan:1, Feb:2, Mar:3, Apr:4, May:5, Jun:6,
     Jul:7, Aug:8, Sep:9, Oct:10, Nov:11, Dec:12
   };
-
   return calculateDuration(monthMap[monthStr], Number(yearStr));
 }
+
 function calculateDuration(startMonth, startYear) {
-  const startDate = new Date(startYear, startMonth - 1); // month is 0-based
+  const startDate = new Date(startYear, startMonth - 1);
   const currentDate = new Date();
 
   let years = currentDate.getFullYear() - startDate.getFullYear();
@@ -21,6 +25,43 @@ function calculateDuration(startMonth, startYear) {
 
   return `${years} yr ${months} mos`;
 }
+
+/* ================= EXCEL READER ================= */
+
+const SHEET_ID = "1aA6CSyPmdR4Qwn1wgyCRJR6oFIbZ0Mip";
+const EXCEL_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=xlsx`;
+
+export async function readSkillsFromDrive() {
+  const res = await fetch(EXCEL_URL);
+  const buffer = await res.arrayBuffer();
+
+  const workbook = XLSX.read(buffer, { type: "array" });
+  const sheet = workbook.Sheets[workbook.SheetNames[0]];
+  const rows = XLSX.utils.sheet_to_json(sheet); // [{title,name,image}]
+
+  return transformSkills(rows);
+}
+
+/* ================= TRANSFORM ================= */
+
+function transformSkills(rows) {
+  const map = {};
+
+  rows.forEach(({ title, name, image }) => {
+    if (!title || !name || !image) return;
+
+    if (!map[title]) {
+      map[title] = { title, skills: [] };
+    }
+
+    map[title].skills.push({ name, image });
+  });
+
+  return Object.values(map);
+}
+
+readSkillsFromDrive().then(console.log);
+
 export const Bio = {
   name: "Papun Mohapatra",
   roles: [
