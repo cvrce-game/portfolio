@@ -1,3 +1,26 @@
+function calculateFromString(dateStr) {
+  const [monthStr, yearStr] = dateStr.split(" ");
+  const monthMap = {
+    Jan:1, Feb:2, Mar:3, Apr:4, May:5, Jun:6,
+    Jul:7, Aug:8, Sep:9, Oct:10, Nov:11, Dec:12
+  };
+
+  return calculateDuration(monthMap[monthStr], Number(yearStr));
+}
+function calculateDuration(startMonth, startYear) {
+  const startDate = new Date(startYear, startMonth - 1); // month is 0-based
+  const currentDate = new Date();
+
+  let years = currentDate.getFullYear() - startDate.getFullYear();
+  let months = currentDate.getMonth() - startDate.getMonth();
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  return `${years} yr ${months} mos`;
+}
 export const Bio = {
   name: "Papun Mohapatra",
   roles: [
@@ -166,7 +189,7 @@ export const experiences = [
     img: "https://www.vhv.rs/dpng/d/492-4925954_deloitte-logo-deloitte-hd-png-download.png",
     role: "Senior Consultant",
     company: "Deloitte Consulting USI",
-    date: "Apr 2024 - Present · 1 yr 9 mos",
+    date: `Apr 2024 - Present · ${calculateFromString("Apr 2024")}`,
     desc: "JavaScript, React, .Net, Jira, Project Management",
     projectName: "State of Florida Worker Portal – Underwriting Ecosystem Modernization",
     projectDescription: "Led end to end development modernization and architectural overhaul of the State of Florida's critical public assistance portal. This enterprise-scale ecosystem serves as the central hub for Floridians to apply for and manage vital benefits, including SNAP (Food Stamps), Medicaid, and TANF (Cash Assistance). The initiative focused on transforming the legacy system into a responsive, accessible, and high-performance web and mobile interface, streamlining the application process for millions of residents and enhancing workflow efficiency for state caseworkers.",
