@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import * as XLSX from 'xlsx';
+import { calculateFromString, readExcelData } from '../../utils/CommonUtils';
 
 const SHEET_ID = '1aA6CSyPmdR4Qwn1wgyCRJR6oFIbZ0Mip';
 const EXCEL_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=xlsx`;
@@ -128,12 +129,7 @@ const Skills = () => {
   useEffect(() => {
     const readSkillsFromDrive = async () => {
       try {
-        const res = await fetch(EXCEL_URL);
-        const buffer = await res.arrayBuffer();
-
-        const workbook = XLSX.read(buffer, { type: 'array' });
-        const sheet = workbook.Sheets[workbook.SheetNames[0]];
-        const rows = XLSX.utils.sheet_to_json(sheet);
+        const rows = await readExcelData(EXCEL_URL, 'Skills');
 
         return transformSkills(rows);
       } catch (error) {

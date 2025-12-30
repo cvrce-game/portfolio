@@ -8,8 +8,7 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import ExperienceCard from '../Cards/ExperienceCard';
-import * as XLSX from 'xlsx';
-import { calculateFromString } from '../../data/constants';
+import { calculateFromString, excelDateToJSDate, readExcelData } from '../../utils/CommonUtils';
 
 const EXCEL_URL = `https://docs.google.com/spreadsheets/d/1aA6CSyPmdR4Qwn1wgyCRJR6oFIbZ0Mip/export?format=xlsx`;
 
@@ -81,28 +80,15 @@ const Experience = () => {
     useEffect(() => {
         const readExperiencesFromDrive = async () => {
             try {
-                const res = await fetch(EXCEL_URL);
-                const buffer = await res.arrayBuffer();
+                const rows = await readExcelData(EXCEL_URL, 'Experience');
 
-                const workbook = XLSX.read(buffer, { type: 'array' });
-                const sheetName = 'Experience';
-                const sheet = workbook.Sheets[sheetName];
-
-                let rows;
-                if (!sheet) {
-                    console.error(`Sheet "${sheetName}" not found. Falling back to the first sheet.`);
-                    const firstSheetName = workbook.SheetNames[0];
-                    rows = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheetName]);
-                } else {
-                    rows = XLSX.utils.sheet_to_json(sheet);
-                }
-                
                 const formattedExperiences = rows.map(row => {
-                    const date = row.date;
-                    let formattedDate = date;
-                    if (date && date.includes('Present')) {
-                        const startDate = date.split(' - ')[0];
-                        formattedDate = `${date} · ${calculateFromString(startDate)}`;
+                    let formattedDate;
+                    if (typeof row.date === 'string' && row.date.includes('Present')) {
+                        const startDate = row.date.split(' - ')[0];
+                        formattedDate = `${row.date} · ${calculateFromString(startDate)}`;
+                    } else {
+                        formattedDate = row.date;
                     }
 
                     return {
@@ -130,14 +116,14 @@ const Experience = () => {
                 </Desc>
                 <TimelineSection>
                     <Timeline>
-                        {experiences.map((experience,index) => (
+                        {experiences.map((experience, index) => (
                             <TimelineItem key={index}>
                                 <TimelineSeparator>
                                     <TimelineDot variant="outlined" color="secondary" />
                                     {index !== experiences.length - 1 && <TimelineConnector style={{ background: '#854CE6' }} />}
                                 </TimelineSeparator>
                                 <TimelineContent sx={{ py: '12px', px: 2 }}>
-                                    <ExperienceCard experience={experience}/>
+                                    <ExperienceCard experience={experience} />
                                 </TimelineContent>
                             </TimelineItem>
                         ))}
