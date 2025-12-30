@@ -1,6 +1,10 @@
-import React from 'react'
-import styled from 'styled-components'
-import { skills } from '../../data/constants'
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { skills as hardcodedSkills } from '../../data/constants';
+import * as XLSX from 'xlsx';
+
+const SHEET_ID = '1aA6CSyPmdR4Qwn1wgyCRJR6oFIbZ0Mip';
+const EXCEL_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=xlsx`;
 
 const Container = styled.div`
 display: flex;
@@ -120,31 +124,77 @@ const SkillImage = styled.img`
 
 
 const Skills = () => {
+  const [frontendSkills, setFrontendSkills] = useState([]);
+
+  useEffect(() => {
+    const readSkillsFromDrive = async () => {
+      try {
+        const res = await fetch(EXCEL_URL);
+        const buffer = await res.arrayBuffer();
+
+        const workbook = XLSX.read(buffer, { type: 'array' });
+        const sheet = workbook.Sheets[workbook.SheetNames[0]];
+        const rows = XLSX.utils.sheet_to_json(sheet);
+
+        return transformSkills(rows);
+      } catch (error) {
+        console.error('Error reading skills from drive:', error);
+        return [];
+      }
+    };
+
+    const transformSkills = (rows) => {
+      const map = {};
+      rows.forEach(({ Category, Skill, image }) => {
+        if (!Category || !Skill || !image) return;
+
+        if (!map[Category]) {
+          map[Category] = [];
+        }
+
+        map[Category].push({
+          name: Skill,
+          image,
+        });
+      });
+
+      return Object.keys(map).map((category) => ({
+        title: category,
+        skills: map[category],
+      }));
+    };
+
+    const fetchData = async () => {
+      const skills = await readSkillsFromDrive();
+      setFrontendSkills(skills);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Container id="skills">
       <Wrapper>
         <Title>Skills</Title>
-        <Desc>Here are some of my skills on which I have been working on for the past 2 years.
-        </Desc>
+        <Desc>Here are some of my skills on which I have been working on for the past 2 years.</Desc>
         <SkillsContainer>
-          {skills.map((skill) => (
-            <Skill>
+          {frontendSkills.map((skill) => (
+            <Skill key={skill.title}>
               <SkillTitle>{skill.title}</SkillTitle>
               <SkillList>
                 {skill.skills.map((item) => (
-                  <SkillItem>
-                    <SkillImage src={item.image}/>
+                  <SkillItem key={item.name}>
+                    <SkillImage src={item.image} />
                     {item.name}
                   </SkillItem>
                 ))}
               </SkillList>
             </Skill>
           ))}
-
         </SkillsContainer>
       </Wrapper>
     </Container>
-  )
-}
+  );
+};
 
 export default Skills
