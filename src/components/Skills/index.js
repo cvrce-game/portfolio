@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import * as XLSX from 'xlsx';
-import { calculateFromString, readExcelData } from '../../utils/CommonUtils';
+import { readExcelData } from '../../utils/CommonUtils';
 
 const SHEET_ID = '1aA6CSyPmdR4Qwn1wgyCRJR6oFIbZ0Mip';
 const EXCEL_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=xlsx`;

@@ -8,7 +8,7 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import ExperienceCard from '../Cards/ExperienceCard';
-import { calculateFromString, excelDateToJSDate, readExcelData } from '../../utils/CommonUtils';
+import { calculateFromString, readExcelData } from '../../utils/CommonUtils';
 
 const EXCEL_URL = `https://docs.google.com/spreadsheets/d/1aA6CSyPmdR4Qwn1wgyCRJR6oFIbZ0Mip/export?format=xlsx`;
 
