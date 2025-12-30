@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { readExcelData } from '../../utils/CommonUtils';
-
-const SHEET_ID = '1aA6CSyPmdR4Qwn1wgyCRJR6oFIbZ0Mip';
-const EXCEL_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=xlsx`;
+import { CommonConstant } from '../../utils/CommonConstant';
 
 const Container = styled.div`
 display: flex;
@@ -128,7 +126,7 @@ const Skills = () => {
   useEffect(() => {
     const readSkillsFromDrive = async () => {
       try {
-        const rows = await readExcelData(EXCEL_URL, 'Skills');
+        const rows = await readExcelData(CommonConstant.EXCEL_URL, 'Skills');
 
         return transformSkills(rows);
       } catch (error) {

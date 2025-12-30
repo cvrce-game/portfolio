@@ -9,8 +9,7 @@ import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import ExperienceCard from '../Cards/ExperienceCard';
 import { calculateFromString, readExcelData } from '../../utils/CommonUtils';
-
-const EXCEL_URL = `https://docs.google.com/spreadsheets/d/1aA6CSyPmdR4Qwn1wgyCRJR6oFIbZ0Mip/export?format=xlsx`;
+import { CommonConstant } from '../../utils/CommonConstant';
 
 const Container = styled.div`
     display: flex;
@@ -80,7 +79,7 @@ const Experience = () => {
     useEffect(() => {
         const readExperiencesFromDrive = async () => {
             try {
-                const rows = await readExcelData(EXCEL_URL, 'Experience');
+                const rows = await readExcelData(CommonConstant.EXCEL_URL, 'Experience');
 
                 const formattedExperiences = rows.map(row => {
                     let formattedDate;
