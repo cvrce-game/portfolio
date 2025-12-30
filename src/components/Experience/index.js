@@ -1,6 +1,6 @@
 
-import React from 'react'
-import styled from 'styled-components'
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import Timeline from '@mui/lab/Timeline';
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
@@ -8,7 +8,10 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import ExperienceCard from '../Cards/ExperienceCard';
-import { experiences } from '../../data/constants';
+import * as XLSX from 'xlsx';
+import { calculateFromString } from '../../data/constants';
+
+const EXCEL_URL = `https://docs.google.com/spreadsheets/d/1aA6CSyPmdR4Qwn1wgyCRJR6oFIbZ0Mip/export?format=xlsx`;
 
 const Container = styled.div`
     display: flex;
@@ -72,9 +75,52 @@ const TimelineSection = styled.div`
     gap: 12px;
 `;
 
+const Experience = () => {
+    const [experiences, setExperiences] = useState([]);
 
+    useEffect(() => {
+        const readExperiencesFromDrive = async () => {
+            try {
+                const res = await fetch(EXCEL_URL);
+                const buffer = await res.arrayBuffer();
 
-const index = () => {
+                const workbook = XLSX.read(buffer, { type: 'array' });
+                const sheetName = 'Experience';
+                const sheet = workbook.Sheets[sheetName];
+
+                let rows;
+                if (!sheet) {
+                    console.error(`Sheet "${sheetName}" not found. Falling back to the first sheet.`);
+                    const firstSheetName = workbook.SheetNames[0];
+                    rows = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheetName]);
+                } else {
+                    rows = XLSX.utils.sheet_to_json(sheet);
+                }
+                
+                const formattedExperiences = rows.map(row => {
+                    const date = row.date;
+                    let formattedDate = date;
+                    if (date && date.includes('Present')) {
+                        const startDate = date.split(' - ')[0];
+                        formattedDate = `${date} · ${calculateFromString(startDate)}`;
+                    }
+
+                    return {
+                        ...row,
+                        date: formattedDate,
+                        skills: row.skills ? row.skills.split('\n').map(skill => skill.trim()) : []
+                    };
+                });
+
+                setExperiences(formattedExperiences);
+            } catch (error) {
+                console.error('Error reading experiences from drive:', error);
+            }
+        };
+
+        readExperiencesFromDrive();
+    }, []);
+
     return (
         <Container id="experience">
             <Wrapper>
@@ -85,7 +131,7 @@ const index = () => {
                 <TimelineSection>
                     <Timeline>
                         {experiences.map((experience,index) => (
-                            <TimelineItem>
+                            <TimelineItem key={index}>
                                 <TimelineSeparator>
                                     <TimelineDot variant="outlined" color="secondary" />
                                     {index !== experiences.length - 1 && <TimelineConnector style={{ background: '#854CE6' }} />}
@@ -103,4 +149,4 @@ const index = () => {
     )
 }
 
-export default index
+export default Experience;

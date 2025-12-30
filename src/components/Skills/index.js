@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { skills as hardcodedSkills } from '../../data/constants';
 import * as XLSX from 'xlsx';
 
 const SHEET_ID = '1aA6CSyPmdR4Qwn1wgyCRJR6oFIbZ0Mip';
@@ -124,7 +123,7 @@ const SkillImage = styled.img`
 
 
 const Skills = () => {
-  const [frontendSkills, setFrontendSkills] = useState([]);
+  const [skills, setSkills] = useState([]);
 
   useEffect(() => {
     const readSkillsFromDrive = async () => {
@@ -166,7 +165,7 @@ const Skills = () => {
 
     const fetchData = async () => {
       const skills = await readSkillsFromDrive();
-      setFrontendSkills(skills);
+      setSkills(skills);
     };
 
     fetchData();
@@ -178,7 +177,7 @@ const Skills = () => {
         <Title>Skills</Title>
         <Desc>Here are some of my skills on which I have been working on for the past 2 years.</Desc>
         <SkillsContainer>
-          {frontendSkills.map((skill) => (
+          {skills.map((skill) => (
             <Skill key={skill.title}>
               <SkillTitle>{skill.title}</SkillTitle>
               <SkillList>
