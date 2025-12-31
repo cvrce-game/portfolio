@@ -35,6 +35,7 @@ const HeroSection = () => {
         linkedin: '',
         insta: '',
         facebook: '',
+        bioImg: HeroImg
       };
 
       if (!bioRow) {
@@ -54,6 +55,7 @@ const HeroSection = () => {
         linkedin: bioRow.linkedin || defaultBio.linkedin,
         insta: bioRow.insta || defaultBio.insta,
         facebook: bioRow.facebook || defaultBio.facebook,
+        bioImg: defaultBio.bioImg,
       };
     };
 
@@ -112,7 +114,7 @@ const HeroSection = () => {
           </HeroLeftContainer>
 
           <HeroRightContainer id="Right">
-            <Img src={HeroImg} alt="hero-image" />
+            <Img src={bio?.bioImg} alt="hero-image" />
           </HeroRightContainer>
         </HeroInnerContainer>
       </HeroContainer>
