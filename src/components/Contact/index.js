@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useRef } from 'react';
-import { Snackbar } from '@mui/material';
+import emailjs from '@emailjs/browser';
+import Modal from '../Cards/Modal';
 
 const Container = styled.div`
 display: flex;
@@ -125,10 +126,34 @@ const Contact = () => {
 
   //hooks
   const [open, setOpen] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const form = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
+    // Go to https://www.emailjs.com/
+    // Create an account.
+    // Add an email service. For personal use, you can use your own gmail account.
+    // Create an email template.
+    // Then get the following credentials from your account.
+    // Service ID: Find this in the 'Email Services' section.
+    // Template ID: Find this in the 'Email Templates' section.
+    // Public Key: Find this in the 'Account' section.
+    emailjs.sendForm(
+      'service_sbbzrec', // Get this from your EmailJS account
+      'template_o5dht7o', // Get this from your EmailJS account
+      form.current,
+      'u5BYIqLGo5uwjsmt_' // Get this from your EmailJS account
+      )
+      .then((result) => {
+          setOpen(true);
+          form.current.reset();
+          setLoading(false);
+      }, (error) => {
+          console.log(error.text);
+          setLoading(false);
+      });
   }
 
 
@@ -144,15 +169,9 @@ const Contact = () => {
           <ContactInput placeholder="Your Name" name="from_name" />
           <ContactInput placeholder="Subject" name="subject" />
           <ContactInputMessage placeholder="Message" rows="4" name="message" />
-          <ContactButton type="submit" value="Send" />
+          <ContactButton type="submit" value={loading ? 'Sending...' : 'Send'} />
         </ContactForm>
-        <Snackbar
-          open={open}
-          autoHideDuration={6000}
-          onClose={()=>setOpen(false)}
-          message="Email sent successfully!"
-          severity="success"
-        />
+        {open && <Modal message="Email sent successfully!" onClose={() => setOpen(false)} />}
       </Wrapper>
     </Container>
   )
