@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { readExcelData } from '../../utils/CommonUtils';
 import { CommonConstant } from '../../utils/CommonConstant';
+import { CircularProgress } from '@mui/material';
 
 const Container = styled.div`
 display: flex;
@@ -122,12 +123,12 @@ const SkillImage = styled.img`
 
 const Skills = () => {
   const [skills, setSkills] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const readSkillsFromDrive = async () => {
       try {
         const rows = await readExcelData(CommonConstant.EXCEL_URL, 'Skills');
-
         return transformSkills(rows);
       } catch (error) {
         console.error('Error reading skills from drive:', error);
@@ -157,8 +158,10 @@ const Skills = () => {
     };
 
     const fetchData = async () => {
-      const skills = await readSkillsFromDrive();
-      setSkills(skills);
+      setLoading(true);
+      const skillsData = await readSkillsFromDrive();
+      setSkills(skillsData);
+      setLoading(false);
     };
 
     fetchData();
@@ -169,21 +172,23 @@ const Skills = () => {
       <Wrapper>
         <Title>Skills</Title>
         <Desc>Here are some of my skills on which I have been working on for the past 2 years.</Desc>
-        <SkillsContainer>
-          {skills.map((skill) => (
-            <Skill key={skill.title}>
-              <SkillTitle>{skill.title}</SkillTitle>
-              <SkillList>
-                {skill.skills.map((item) => (
-                  <SkillItem key={item.name}>
-                    <SkillImage src={item.image} />
-                    {item.name}
-                  </SkillItem>
-                ))}
-              </SkillList>
-            </Skill>
-          ))}
-        </SkillsContainer>
+        {loading ? <CircularProgress /> :
+          <SkillsContainer>
+            {skills.map((skill) => (
+              <Skill key={skill.title}>
+                <SkillTitle>{skill.title}</SkillTitle>
+                <SkillList>
+                  {skill.skills.map((item) => (
+                    <SkillItem key={item.name}>
+                      <SkillImage src={item.image} />
+                      {item.name}
+                    </SkillItem>
+                  ))}
+                </SkillList>
+              </Skill>
+            ))}
+          </SkillsContainer>
+        }
       </Wrapper>
     </Container>
   );

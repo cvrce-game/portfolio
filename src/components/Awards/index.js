@@ -4,13 +4,16 @@ import AwardCard from '../Cards/AwardCard';
 import AwardDetails from '../AwardDetails';
 import { readExcelData } from '../../utils/CommonUtils';
 import { CommonConstant } from '../../utils/CommonConstant';
+import { CircularProgress } from '@mui/material';
 
 const Awards = ({ openModal, setOpenModal }) => {
   const [toggle, setToggle] = useState('award');
   const [awards, setAwards] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const readAwardsFromDrive = async () => {
+      setLoading(true);
       try {
         const rows = await readExcelData(CommonConstant.EXCEL_URL, 'Awards');
         return transformAwards(rows);
@@ -36,6 +39,7 @@ const Awards = ({ openModal, setOpenModal }) => {
     const fetchData = async () => {
       const awardsData = await readAwardsFromDrive();
       setAwards(awardsData);
+      setLoading(false);
     };
 
     fetchData();
@@ -59,12 +63,14 @@ const Awards = ({ openModal, setOpenModal }) => {
             </ToggleButton>
           )}
         </ToggleButtonGroup>
-        <CardContainer>
-          {toggle === 'award' &&
-            awards.map((award) => (
-              <AwardCard key={award.id} award={award} openModal={openModal} setOpenModal={setOpenModal} />
-            ))}
-        </CardContainer>
+        {loading ? <CircularProgress /> :
+          <CardContainer>
+            {toggle === 'award' &&
+              awards.map((award) => (
+                <AwardCard key={award.id} award={award} openModal={openModal} setOpenModal={setOpenModal} />
+              ))}
+          </CardContainer>
+        }
         {openModal?.state && <AwardDetails openModal={openModal} setOpenModal={setOpenModal} />}
       </Wrapper>
     </Container>
