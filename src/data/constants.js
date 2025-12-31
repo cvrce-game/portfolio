@@ -62,7 +62,7 @@ function transformSkills(rows) {
 function getSkills(data) {
   return data?.skills || [];
 }
-readSkillsFromDrive().then(console.log);
+readSkillsFromDrive();
 
 export const Bio = {
   name: "Papun Mohapatra",

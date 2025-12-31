@@ -128,7 +128,7 @@ const AwardCard = ({award,setOpenModal}) => {
             <Image src={award.img}/>
             <Tags>
                 {award.tags?.map((tag, index) => (
-                <Tag>{tag}</Tag>
+                <Tag key={index}>{tag}</Tag>
                 ))}
             </Tags>
             <Details>
@@ -137,8 +137,8 @@ const AwardCard = ({award,setOpenModal}) => {
                 <Description>{award.description}</Description>
             </Details>
             <Members>
-                {award.member?.map((member) => (
-                    <Avatar src={member.img}/>
+                {award.member?.map((member, index) => (
+                    <Avatar key={index} src={member.img}/>
                 ))}
             </Members>
             {/* <Button>View Project</Button> */}
