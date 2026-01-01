@@ -13,7 +13,7 @@ import {
   SubTitle,
   ResumeButton,
 } from './HeroStyle';
-import HeroImg from '../../images/HeroImage.jpg';
+import HeroImg from '../../images/HeroImage.JPG';
 import Typewriter from 'typewriter-effect';
 import { readExcelData } from '../../utils/CommonUtils';
 import { CommonConstant } from '../../utils/CommonConstant';
